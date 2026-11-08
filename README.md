@@ -70,3 +70,4 @@ Once your site is live, you can personalize it in two ways:
    - **Theme**
 3. Click **"Copy"** next to the Shareable Link.
 4. Send that copied link to her! When she opens it, everything will already be tailored just for her.
+

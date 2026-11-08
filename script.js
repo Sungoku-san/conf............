@@ -42,6 +42,11 @@ let noAttempts = 0;
 let isAudioPlaying = false;
 let audioContext = null;
 let musicInterval = null;
+let customAudioEl = null;
+
+// Selected date options
+let selectedActivity = "Cozy Coffee & Sweet Treats ☕🥐";
+let selectedDay = "Friday Night ✨";
 
 // Hilarious & cute pleading messages when trying to tap/hover "NO"
 const NO_BUTTON_TEXTS = [
@@ -90,6 +95,22 @@ function loadConfigFromURL() {
   }
 }
 
+function updateWhatsAppLink() {
+  const waBtn = document.getElementById("btn-whatsapp-action");
+  if (!waBtn) return;
+
+  const datePlan = `Date Plan: ${selectedActivity} on ${selectedDay}!`;
+  const message = `Hey ${config.senderName}! I said YES! 🥰❤️ Can't wait for our date! (${datePlan})`;
+  const encoded = encodeURIComponent(message);
+
+  if (config.whatsappNumber && config.whatsappNumber.trim()) {
+    const cleanNum = config.whatsappNumber.replace(/[^0-9]/g, '');
+    waBtn.href = `https://wa.me/${cleanNum}?text=${encoded}`;
+  } else {
+    waBtn.href = `https://api.whatsapp.com/send?text=${encoded}`;
+  }
+}
+
 function applyConfig() {
   // Apply theme
   document.body.className = config.theme !== "rose" ? `theme-${config.theme}` : "";
@@ -103,19 +124,7 @@ function applyConfig() {
   document.getElementById("letter-body-text").textContent = config.letter;
   document.getElementById("letter-sender-name").textContent = `Forever yours, ${config.senderName}`;
   
-  // WhatsApp link config
-  const waBtn = document.getElementById("btn-whatsapp-action");
-  if (config.whatsappNumber && config.whatsappNumber.trim()) {
-    const cleanNum = config.whatsappNumber.replace(/[^0-9]/g, '');
-    const waText = encodeURIComponent(`Hey ${config.senderName}! I said YES! 🥰❤️ Let's go on our date!`);
-    waBtn.href = `https://wa.me/${cleanNum}?text=${waText}`;
-    waBtn.style.display = "inline-flex";
-  } else {
-    // General share text if no phone number provided
-    const waText = encodeURIComponent(`I said YES to ${config.senderName}! 🥰❤️`);
-    waBtn.href = `https://api.whatsapp.com/send?text=${waText}`;
-  }
-
+  updateWhatsAppLink();
   updateMemoryCard();
 }
 
@@ -334,6 +343,37 @@ function setupEventListeners() {
     musicToggle.addEventListener("click", toggleMusic);
   }
 
+  // Date planner buttons
+  document.querySelectorAll("#date-activity-options .option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#date-activity-options .option-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedActivity = btn.getAttribute("data-value");
+      updateWhatsAppLink();
+      playChime(580);
+    });
+  });
+
+  document.querySelectorAll("#date-day-options .option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#date-day-options .option-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedDay = btn.getAttribute("data-value");
+      updateWhatsAppLink();
+      playChime(640);
+    });
+  });
+
+  // Sparkle Trail on pointer movement
+  let lastSparkleTime = 0;
+  window.addEventListener("pointermove", (e) => {
+    const now = Date.now();
+    if (now - lastSparkleTime > 70) {
+      lastSparkleTime = now;
+      createCursorSparkle(e.clientX, e.clientY);
+    }
+  });
+
   // Customizer modal
   const openCustomizerBtn = document.getElementById("btn-open-customizer");
   const closeCustomizerBtn = document.getElementById("btn-close-customizer");
@@ -551,6 +591,16 @@ function createMiniHearts(x, y) {
 
     setTimeout(() => heart.remove(), 750);
   }
+}
+
+function createCursorSparkle(x, y) {
+  const sparkle = document.createElement("div");
+  sparkle.className = "cursor-heart";
+  sparkle.textContent = ["✨", "💖", "🌸", "💕"][Math.floor(Math.random() * 4)];
+  sparkle.style.left = `${x}px`;
+  sparkle.style.top = `${y}px`;
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
 }
 
 // Background Floating Ambient Particles

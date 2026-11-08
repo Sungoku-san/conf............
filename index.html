@@ -76,6 +76,9 @@
       </div>
 
       <div class="memory-card">
+        <div id="memory-polaroid" class="polaroid-frame" style="display: none;">
+          <img id="polaroid-image" class="polaroid-img" src="" alt="Memory">
+        </div>
         <div id="memory-icon" class="memory-icon">✨</div>
         <h2 id="memory-text" class="memory-text">The way you smile lights up my whole world</h2>
         <p id="memory-subtext" class="memory-subtext">Every time you smile, my heart skips a beat.</p>
@@ -209,6 +212,28 @@
         </div>
       </div>
 
+      <!-- Date Planner (Interactive & Fun) -->
+      <div class="date-planner-box">
+        <div class="date-planner-title">
+          <span>☕</span> Plan Our First Official Date!
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Pick where we go:</p>
+        <div class="options-grid" id="date-activity-options">
+          <button type="button" class="option-btn selected" data-value="Cozy Coffee & Sweet Treats ☕🥐">☕ Cozy Coffee & Treats</button>
+          <button type="button" class="option-btn" data-value="Sunset Walk & Street Food 🌅🌮">🌅 Sunset & Street Food</button>
+          <button type="button" class="option-btn" data-value="Movie Night & Ice Cream 🎬🍦">🎬 Movie & Ice Cream</button>
+          <button type="button" class="option-btn" data-value="Stargazing & Long Drives 🌌🚗">🌌 Stargazing Drive</button>
+        </div>
+
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Pick a day:</p>
+        <div class="options-grid" id="date-day-options">
+          <button type="button" class="option-btn selected" data-value="Friday Night ✨">Friday Night ✨</button>
+          <button type="button" class="option-btn" data-value="Saturday Afternoon 🌸">Saturday 🌸</button>
+          <button type="button" class="option-btn" data-value="Sunday Relax ☀️">Sunday ☀️</button>
+          <button type="button" class="option-btn" data-value="Anytime with you! 🥰">Anytime! 🥰</button>
+        </div>
+      </div>
+
       <!-- Action Buttons -->
       <div class="action-buttons-group">
         <a id="btn-whatsapp-action" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
@@ -257,6 +282,18 @@
         </div>
 
         <div class="form-group">
+          <label>Photos / Memories (Optional Image URLs)</label>
+          <input type="url" id="cust-img1" class="form-control" placeholder="Photo 1 URL (e.g. https://.../pic1.jpg)" style="margin-bottom: 8px;">
+          <input type="url" id="cust-img2" class="form-control" placeholder="Photo 2 URL" style="margin-bottom: 8px;">
+          <input type="url" id="cust-img3" class="form-control" placeholder="Photo 3 URL">
+        </div>
+
+        <div class="form-group">
+          <label for="cust-music">Custom Song (Optional MP3 URL)</label>
+          <input type="url" id="cust-music" class="form-control" placeholder="Direct .mp3 audio link (leave empty for built-in romantic chime)">
+        </div>
+
+        <div class="form-group">
           <label>3 Reasons Why You Love Her</label>
           <input type="text" id="cust-m1" class="form-control" placeholder="Reason 1: Your smile lights up my world" style="margin-bottom: 8px;">
           <input type="text" id="cust-m2" class="form-control" placeholder="Reason 2: Silly jokes with you are the best" style="margin-bottom: 8px;">
@@ -298,3 +335,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
