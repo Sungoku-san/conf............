@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Special Question For You 💌</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Floating Hearts Background Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Top Floating Controls -->
+  <div class="top-nav">
+    <button id="btn-music-toggle" class="icon-btn" title="Toggle Romantic Music" aria-label="Toggle Romantic Music">
+      🎵
+    </button>
+    <button id="btn-open-customizer" class="icon-btn" title="Personalize For Your Crush" aria-label="Personalize">
+      ⚙️
+    </button>
+  </div>
+
+  <!-- Main Experience Container -->
+  <main class="app-container">
+
+    <!-- ====================================================================
+         STAGE 1: THE SECRET ENVELOPE
+         ==================================================================== -->
+    <section id="stage-1" class="section glass-card active">
+      <h2 style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-bottom: 6px;">
+        SPECIAL DELIVERY 💌
+      </h2>
+      <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 12px;">
+        A Secret For You
+      </h1>
+      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+        Sent with love by <strong id="envelope-sender" style="color: var(--primary);">Yours Truly</strong>
+      </p>
+
+      <!-- 3D Interactive Envelope -->
+      <div id="envelope-wrapper" class="envelope-wrapper" title="Tap to open letter">
+        <div id="envelope" class="envelope">
+          <div class="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+          <div class="envelope-seal">❤️</div>
+          <div class="letter-peek">
+            <div style="font-size: 1.8rem; margin-bottom: 2px;">💌</div>
+            <div class="letter-peek-lines"></div>
+            <div class="letter-peek-lines" style="width: 60%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hint-pill">
+        <span>✨</span> Tap the envelope to open!
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         STAGE 2: SWEET REASONS & MEMORIES
+         ==================================================================== -->
+    <section id="stage-2" class="section glass-card">
+      <div class="progress-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <div class="memory-card">
+        <div id="memory-icon" class="memory-icon">✨</div>
+        <h2 id="memory-text" class="memory-text">The way you smile lights up my whole world</h2>
+        <p id="memory-subtext" class="memory-subtext">Every time you smile, my heart skips a beat.</p>
+      </div>
+
+      <button id="btn-next-memory" class="btn btn-yes" style="margin-top: 20px;">
+        Continue 💖
+      </button>
+    </section>
+
+    <!-- ====================================================================
+         STAGE 3: THE PROPOSAL QUESTION (VIRAL RUNAWAY "NO" BUTTON)
+         ==================================================================== -->
+    <section id="stage-3" class="section glass-card">
+      <!-- Cute Character Illustration (Bubu / Teddy with beating heart) -->
+      <div class="character-box">
+        <svg class="character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bear Ears -->
+          <circle cx="55" cy="55" r="28" fill="#e8b49b"/>
+          <circle cx="55" cy="55" r="16" fill="#fca8b4"/>
+          <circle cx="145" cy="55" r="28" fill="#e8b49b"/>
+          <circle cx="145" cy="55" r="16" fill="#fca8b4"/>
+          <!-- Bear Head -->
+          <ellipse cx="100" cy="95" rx="60" ry="52" fill="#ffd5be"/>
+          <!-- Rosy Cheeks -->
+          <ellipse cx="62" cy="106" rx="12" ry="7" fill="#ff99a8" opacity="0.6"/>
+          <ellipse cx="138" cy="106" rx="12" ry="7" fill="#ff99a8" opacity="0.6"/>
+          <!-- Sparkly Eyes -->
+          <ellipse cx="75" cy="88" rx="8" ry="10" fill="#2d1c16"/>
+          <circle cx="72" cy="85" r="3" fill="#ffffff"/>
+          <ellipse cx="125" cy="88" rx="8" ry="10" fill="#2d1c16"/>
+          <circle cx="122" cy="85" r="3" fill="#ffffff"/>
+          <!-- Snout & Nose -->
+          <ellipse cx="100" cy="104" rx="18" ry="13" fill="#ffffff"/>
+          <ellipse cx="100" cy="99" rx="6" ry="4" fill="#6d4332"/>
+          <path d="M96 105 Q100 110 104 105" stroke="#6d4332" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Bear Body -->
+          <ellipse cx="100" cy="155" rx="48" ry="38" fill="#ffd5be"/>
+          <!-- Cute Beating Heart held by paws -->
+          <g style="transform-origin: 100px 145px; animation: heartbeat 1.5s infinite ease-in-out;">
+            <path d="M100 160 C80 135, 65 145, 65 130 C65 120, 75 112, 86 112 C93 112, 98 116, 100 120 C102 116, 107 112, 114 112 C125 112, 135 120, 135 130 C135 145, 120 135, 100 160 Z" fill="#ff4d6d"/>
+          </g>
+          <!-- Bear Paws -->
+          <circle cx="68" cy="140" r="14" fill="#ffd5be"/>
+          <circle cx="132" cy="140" r="14" fill="#ffd5be"/>
+        </svg>
+      </div>
+
+      <h1 class="proposal-title">
+        Hey <span id="proposal-name">Cutie</span>!
+      </h1>
+      <h2 id="proposal-question" style="font-size: 1.45rem; font-weight: 800; color: var(--accent); margin-bottom: 6px;">
+        Will you be my girlfriend? 💖
+      </h2>
+      <p id="proposal-subtitle" class="proposal-subtitle">
+        You're the sweetest part of my every day. What do you say?
+      </p>
+
+      <!-- The Viral Buttons Arena -->
+      <div class="buttons-area">
+        <button id="btn-yes" class="btn btn-yes">
+          YES! ❤️
+        </button>
+        <button id="btn-no" class="btn btn-no">
+          No 😢
+        </button>
+      </div>
+
+      <div id="funny-dialogue" class="funny-dialogue"></div>
+    </section>
+
+    <!-- ====================================================================
+         STAGE 4: GRAND CELEBRATION & LOVE LETTER
+         ==================================================================== -->
+    <section id="stage-4" class="section glass-card">
+      <div class="celebrate-badge">
+        🎉 Mission Accomplished!
+      </div>
+
+      <!-- Super Happy Celebration Character -->
+      <div id="stage-4-character" class="character-box" style="width: 150px; height: 150px;">
+        <svg class="character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Celebration Hat -->
+          <polygon points="100,20 80,65 120,65" fill="#ffd166"/>
+          <circle cx="100" cy="18" r="6" fill="#ff4d6d"/>
+          <!-- Bear Ears -->
+          <circle cx="55" cy="65" r="24" fill="#e8b49b"/>
+          <circle cx="55" cy="65" r="14" fill="#fca8b4"/>
+          <circle cx="145" cy="65" r="24" fill="#e8b49b"/>
+          <circle cx="145" cy="65" r="14" fill="#fca8b4"/>
+          <!-- Bear Head -->
+          <ellipse cx="100" cy="100" rx="55" ry="48" fill="#ffd5be"/>
+          <!-- Rosy Cheeks -->
+          <ellipse cx="65" cy="110" rx="12" ry="7" fill="#ff758f" opacity="0.8"/>
+          <ellipse cx="135" cy="110" rx="12" ry="7" fill="#ff758f" opacity="0.8"/>
+          <!-- Joyful Closed Eyes (^ ^) -->
+          <path d="M68 96 Q78 86 88 96" stroke="#2d1c16" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M112 96 Q122 86 132 96" stroke="#2d1c16" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <!-- Happy Open Mouth Smile -->
+          <path d="M90 108 Q100 124 110 108 Z" fill="#c9184a"/>
+          <!-- Arms Raised Celebrating -->
+          <ellipse cx="45" cy="115" rx="14" ry="24" transform="rotate(-35 45 115)" fill="#ffd5be"/>
+          <ellipse cx="155" cy="115" rx="14" ry="24" transform="rotate(35 155 115)" fill="#ffd5be"/>
+          <!-- Sparkles -->
+          <text x="30" y="50" font-size="20">✨</text>
+          <text x="150" y="50" font-size="20">💖</text>
+        </svg>
+      </div>
+
+      <h1 class="celebrate-title">
+        YAAAAAY! 🥰
+      </h1>
+      <p style="font-size: 1.1rem; font-weight: 700; color: var(--primary);">
+        I knew you'd say YES! ❤️
+      </p>
+
+      <!-- Love Letter Note -->
+      <div class="love-letter-card">
+        <div class="love-letter-header">
+          Dear <span id="letter-crush-name">Cutie</span>,
+        </div>
+        <div id="letter-body-text" class="love-letter-body">
+          From the first day we started talking, you brought so much warmth, laughter, and joy into my life. Every little message, every laugh, and every moment shared with you has become my favorite part of the day.
+
+          I promise to make you laugh on rainy days, listen whenever you want to talk, cheer for you in everything you do, and cherish you with all my heart.
+
+          Thank you for saying YES! You just made me the happiest person in the universe. 🥰❤️
+        </div>
+        <div id="letter-sender-name" class="love-letter-signature">
+          Forever yours, Yours Truly
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons-group">
+        <a id="btn-whatsapp-action" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          💬 Send Me Your Answer On WhatsApp
+        </a>
+        <button id="btn-replay" class="btn btn-secondary-action">
+          🔄 Relive The Moment
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       CUSTOMIZER MODAL (CUSTOMIZE FOR YOUR CRUSH)
+       ==================================================================== -->
+  <div id="customizer-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚙️ Customize For Your Crush</h2>
+        <button id="btn-close-customizer" class="close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="customizer-form" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label for="cust-crush-name">Her Name (Crush)</label>
+          <input type="text" id="cust-crush-name" class="form-control" placeholder="e.g. Priya, Sophia, Emily" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-sender-name">Your Name</label>
+          <input type="text" id="cust-sender-name" class="form-control" placeholder="e.g. Rahul, Alex, David" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-question">Proposal Question</label>
+          <input type="text" id="cust-question" class="form-control" placeholder="e.g. Will you be my girlfriend? 💖">
+        </div>
+
+        <div class="form-group">
+          <label for="cust-whatsapp">Your WhatsApp Phone Number (Optional)</label>
+          <input type="tel" id="cust-whatsapp" class="form-control" placeholder="e.g. +1 555 123 4567 or 919876543210">
+          <small style="color: #888; font-size: 0.75rem; display: block; margin-top: 4px;">
+            Include country code (e.g. 91 for India, 1 for US). She can click to confirm directly on WhatsApp!
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>3 Reasons Why You Love Her</label>
+          <input type="text" id="cust-m1" class="form-control" placeholder="Reason 1: Your smile lights up my world" style="margin-bottom: 8px;">
+          <input type="text" id="cust-m2" class="form-control" placeholder="Reason 2: Silly jokes with you are the best" style="margin-bottom: 8px;">
+          <input type="text" id="cust-m3" class="form-control" placeholder="Reason 3: I can't imagine my life without you">
+        </div>
+
+        <div class="form-group">
+          <label for="cust-letter">Final Love Letter / Message</label>
+          <textarea id="cust-letter" class="form-control" rows="4" placeholder="Write your heartfelt confession here..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Color Theme</label>
+          <div class="theme-options">
+            <button type="button" class="theme-pill active" data-theme="rose">🌸 Rose</button>
+            <button type="button" class="theme-pill" data-theme="lavender">💜 Lavender</button>
+            <button type="button" class="theme-pill" data-theme="peach">🍑 Peach</button>
+            <button type="button" class="theme-pill" data-theme="midnight">✨ Midnight</button>
+          </div>
+        </div>
+
+        <div class="share-banner">
+          <p><strong>🔗 Instant Shareable Link</strong> (Send this directly to her!):</p>
+          <div class="share-input-row">
+            <input type="text" id="share-url-input" class="form-control" readonly>
+            <button type="button" id="btn-copy-share" class="btn btn-yes" style="padding: 8px 16px; font-size: 0.85rem;">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <button type="button" id="btn-apply-modal" class="btn btn-yes" style="width: 100%; margin-top: 18px;">
+          Apply & Preview ✨
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
