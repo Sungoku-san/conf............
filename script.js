@@ -30,7 +30,7 @@ const DEFAULT_CONFIG = {
 I promise to make you laugh on rainy days, listen whenever you want to talk, cheer for you in everything you do, and cherish you with all my heart.
 
 Thank you for saying YES! You just made me the happiest person in the universe. 🥰❤️`,
-  whatsappNumber: "", // optional phone number e.g. "1234567890"
+  whatsappNumber: "8919727123", // optional phone number e.g. "1234567890"
   theme: "rose"
 };
 
@@ -79,7 +79,7 @@ function loadConfigFromURL() {
   try {
     const hash = window.location.hash.substring(1);
     if (!hash) return;
-    
+
     const params = new URLSearchParams(hash);
     if (params.has("name")) config.crushName = decodeURIComponent(params.get("name"));
     if (params.has("sender")) config.senderName = decodeURIComponent(params.get("sender"));
@@ -104,7 +104,10 @@ function updateWhatsAppLink() {
   const encoded = encodeURIComponent(message);
 
   if (config.whatsappNumber && config.whatsappNumber.trim()) {
-    const cleanNum = config.whatsappNumber.replace(/[^0-9]/g, '');
+    let cleanNum = config.whatsappNumber.replace(/[^0-9]/g, '');
+    if (cleanNum.length === 10) {
+      cleanNum = '91' + cleanNum;
+    }
     waBtn.href = `https://wa.me/${cleanNum}?text=${encoded}`;
   } else {
     waBtn.href = `https://api.whatsapp.com/send?text=${encoded}`;
@@ -114,7 +117,7 @@ function updateWhatsAppLink() {
 function applyConfig() {
   // Apply theme
   document.body.className = config.theme !== "rose" ? `theme-${config.theme}` : "";
-  
+
   // Update elements
   document.getElementById("envelope-sender").textContent = config.senderName;
   document.getElementById("proposal-name").textContent = config.crushName;
@@ -123,7 +126,7 @@ function applyConfig() {
   document.getElementById("letter-crush-name").textContent = config.crushName;
   document.getElementById("letter-body-text").textContent = config.letter;
   document.getElementById("letter-sender-name").textContent = `Forever yours, ${config.senderName}`;
-  
+
   updateWhatsAppLink();
   updateMemoryCard();
 }
@@ -144,13 +147,13 @@ function goToStage(stageNumber) {
 function updateMemoryCard() {
   const currentMem = config.memories[currentMemoryIndex];
   if (!currentMem) return;
-  
+
   const iconEl = document.getElementById("memory-icon");
   const textEl = document.getElementById("memory-text");
   const subtextEl = document.getElementById("memory-subtext");
   const polaroidFrame = document.getElementById("memory-polaroid");
   const polaroidImg = document.getElementById("polaroid-image");
-  
+
   iconEl.textContent = currentMem.icon;
   textEl.textContent = currentMem.text;
   subtextEl.textContent = currentMem.subtext;
@@ -204,10 +207,10 @@ function moveNoButton() {
   const padding = 24;
   const btnWidth = btnNo.offsetWidth || 120;
   const btnHeight = btnNo.offsetHeight || 50;
-  
+
   const maxX = Math.max(padding, window.innerWidth - btnWidth - padding);
   const maxY = Math.max(padding, window.innerHeight - btnHeight - padding);
-  
+
   // Find a position far enough from cursor & YES button
   let randomX, randomY, attempts = 0;
   const yesRect = btnYes.getBoundingClientRect();
@@ -216,10 +219,10 @@ function moveNoButton() {
     randomX = Math.max(padding, Math.floor(Math.random() * maxX));
     randomY = Math.max(padding, Math.floor(Math.random() * maxY));
     attempts++;
-    
+
     const distToCursor = Math.hypot(randomX - lastPointerX, randomY - lastPointerY);
-    const distToYes = Math.hypot(randomX - (yesRect.left + yesRect.width/2), randomY - (yesRect.top + yesRect.height/2));
-    
+    const distToYes = Math.hypot(randomX - (yesRect.left + yesRect.width / 2), randomY - (yesRect.top + yesRect.height / 2));
+
     if ((distToCursor > 140 && distToYes > 120) || attempts > 15) {
       break;
     }
@@ -258,7 +261,7 @@ function setupEventListeners() {
       const env = document.getElementById("envelope");
       env.classList.add("open");
       playChime(523.25); // C5
-      
+
       // Auto start romantic music on user gesture if not playing
       if (!isAudioPlaying) {
         toggleMusic();
@@ -390,7 +393,7 @@ function setupEventListeners() {
   const openCustomizerBtn = document.getElementById("btn-open-customizer");
   const closeCustomizerBtn = document.getElementById("btn-close-customizer");
   const modalOverlay = document.getElementById("customizer-modal");
-  
+
   if (openCustomizerBtn) {
     openCustomizerBtn.addEventListener("click", () => {
       populateCustomizerForm();
@@ -467,7 +470,7 @@ function handleYesClick() {
   goToStage(4);
   playVictoryFanfare();
   triggerFullConfetti();
-  
+
   // Update character to joyful celebration
   const characterBox = document.getElementById("stage-4-character");
   if (characterBox) {
@@ -751,7 +754,7 @@ function playChime(freq = 523.25) {
   try {
     const ctx = getAudioContext();
     playMusicBoxNote(freq, ctx.currentTime, 0.8);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // Evasive cute whoosh/boing sound
@@ -774,7 +777,7 @@ function playEvasionSound() {
 
     osc.start(now);
     osc.stop(now + 0.16);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // Victory Fanfare when "YES" is clicked
@@ -785,14 +788,14 @@ function playVictoryFanfare() {
       { f: 523.25, d: 0.15, offset: 0 },
       { f: 659.25, d: 0.15, offset: 0.16 },
       { f: 783.99, d: 0.15, offset: 0.32 },
-      { f: 1046.5, d: 0.6,  offset: 0.48 }
+      { f: 1046.5, d: 0.6, offset: 0.48 }
     ];
 
     const now = ctx.currentTime;
     notes.forEach(n => {
       playMusicBoxNote(n.f, now + n.offset, n.d);
     });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // ==========================================================================
