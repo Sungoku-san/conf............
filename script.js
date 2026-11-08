@@ -148,10 +148,22 @@ function updateMemoryCard() {
   const iconEl = document.getElementById("memory-icon");
   const textEl = document.getElementById("memory-text");
   const subtextEl = document.getElementById("memory-subtext");
+  const polaroidFrame = document.getElementById("memory-polaroid");
+  const polaroidImg = document.getElementById("polaroid-image");
   
   iconEl.textContent = currentMem.icon;
   textEl.textContent = currentMem.text;
   subtextEl.textContent = currentMem.subtext;
+
+  // Show polaroid photo if URL exists
+  if (config.photos && config.photos[currentMemoryIndex]) {
+    polaroidImg.src = config.photos[currentMemoryIndex];
+    polaroidFrame.style.display = "block";
+    iconEl.style.display = "none";
+  } else {
+    polaroidFrame.style.display = "none";
+    iconEl.style.display = "block";
+  }
 
   // Dots
   document.querySelectorAll(".progress-dots .dot").forEach((dot, idx) => {
@@ -796,6 +808,15 @@ function populateCustomizerForm() {
   document.getElementById("cust-m3").value = config.memories[2].text;
   document.getElementById("cust-letter").value = config.letter;
 
+  if (document.getElementById("cust-img1")) {
+    document.getElementById("cust-img1").value = config.photos && config.photos[0] ? config.photos[0] : "";
+    document.getElementById("cust-img2").value = config.photos && config.photos[1] ? config.photos[1] : "";
+    document.getElementById("cust-img3").value = config.photos && config.photos[2] ? config.photos[2] : "";
+  }
+  if (document.getElementById("cust-music")) {
+    document.getElementById("cust-music").value = config.customMusic || "";
+  }
+
   // Active theme pill
   document.querySelectorAll(".theme-pill").forEach(pill => {
     pill.classList.toggle("active", pill.getAttribute("data-theme") === config.theme);
@@ -813,6 +834,15 @@ function readCustomizerForm() {
   config.memories[1].text = document.getElementById("cust-m2").value.trim() || DEFAULT_CONFIG.memories[1].text;
   config.memories[2].text = document.getElementById("cust-m3").value.trim() || DEFAULT_CONFIG.memories[2].text;
   config.letter = document.getElementById("cust-letter").value.trim() || DEFAULT_CONFIG.letter;
+
+  // Photos & Custom Music
+  const img1 = document.getElementById("cust-img1") ? document.getElementById("cust-img1").value.trim() : "";
+  const img2 = document.getElementById("cust-img2") ? document.getElementById("cust-img2").value.trim() : "";
+  const img3 = document.getElementById("cust-img3") ? document.getElementById("cust-img3").value.trim() : "";
+  config.photos = [img1, img2, img3];
+
+  const musicUrl = document.getElementById("cust-music") ? document.getElementById("cust-music").value.trim() : "";
+  config.customMusic = musicUrl;
 }
 
 function generateShareURL() {
@@ -828,6 +858,10 @@ function generateShareURL() {
   params.set("m2", config.memories[1].text);
   params.set("m3", config.memories[2].text);
   params.set("letter", config.letter);
+  if (config.photos && config.photos[0]) params.set("img1", config.photos[0]);
+  if (config.photos && config.photos[1]) params.set("img2", config.photos[1]);
+  if (config.photos && config.photos[2]) params.set("img3", config.photos[2]);
+  if (config.customMusic) params.set("music", config.customMusic);
 
   const fullURL = `${baseURL}#${params.toString()}`;
   const shareInput = document.getElementById("share-url-input");
